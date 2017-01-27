@@ -108,7 +108,7 @@ public class Board {
             int x = -1; // x value for comparison
             int y = -1; // y value for comparison
             int d = 0; // diagonal value to adjust x and y values
-            int passed = 1;
+            boolean failed = false;
             for (Point point: points) {
                 if (x == -1 && y == -1) {
                     x = point.x;
@@ -134,12 +134,13 @@ public class Board {
                         x += d; y += d; break;
                 }
 
-                if (point.x == x && point.y == y) {
-                    passed++;
+                if (point.x != x || point.y != y) {
+                    failed = true;
+                    break;
                 }
             }
 
-            if (passed >= grid.length) {
+            if (!failed) {
                 return true;
             }
         }
